@@ -57,17 +57,23 @@ export const removeTodo = (id) => {
 }
 
 export const updateTodo = (id, data) => {
+  console.log(id, data);
   return dispatch => {
-    fetch('http://localhost:4000/todos' + id, {
+    const updatedData = {title: data}
+    fetch('http://localhost:4000/todos/' + id, {
       method: 'PUT',
       headers: {
         'Content-Type' : 'application/json'
-      }
+      },
+      body: JSON.stringify(updatedData)
     }).then(response => response.json())
     .then(data => {
       return dispatch({
         type: ActionTypes.UPDATE_TODO,
-        payload: data
+        payload: {
+          id: id,
+          data: data
+        }
       })
     }).catch(err => console.log(err))
   }

@@ -38,9 +38,9 @@ class InputTodo extends React.Component {
     })
   }
 
-  updateTodo(event, id) {
+  updateTodo(id, event) {
     event.preventDefault()
-    this.props.dispatchCreateTodo(id, this.state.editTodo)
+    this.props.dispatchUpdateTodo(id, this.state.editTodo)
     this.setState({
       editTodo: ''
     })
@@ -56,7 +56,7 @@ class InputTodo extends React.Component {
               <input type="text" placeholder="Add todo.." onChange={(event) =>  this.stateWriteTodo(event)} value={this.state.writeTodo}/>
               <button>Submit</button>
             </form>) :
-          (<form onSubmit={(event) => this.updateTodo(event)}>
+          (<form onSubmit={(event) => this.updateTodo(this.props.idEditTodo, event)}>
               <input type="text" placeholder="Edit todo.." onChange={(event) => this.stateEditTodo(event)} value={this.state.editTodo}/>
               <button>Update</button>
               <button onClick={this.props.hideEditTodoForm}>Cancel</button>
